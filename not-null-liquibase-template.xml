@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="${current_time}::${action}::table-${table_name}"
+               author="${author_name}"
+               objectQuotingStrategy="LEGACY">
+        <addNotNullConstraint tableName="${table_name}"
+                              columnName="created_by"
+                              columnDataType="bigint"
+                              constraintName="constraint_not_null_created_by"
+                              validate="true"/>
+        <addNotNullConstraint tableName="${table_name}"
+                              columnName="created_at"
+                              columnDataType="datetime"
+                              constraintName="constraint_not_null_created_at"
+                              validate="true"/>
+        <addNotNullConstraint tableName="${table_name}"
+                              columnName="updated_by"
+                              columnDataType="bigint"
+                              constraintName="constraint_not_null_updated_by"
+                              validate="true"/>
+        <addNotNullConstraint tableName="${table_name}"
+                              columnName="updated_at"
+                              columnDataType="datetime"
+                              constraintName="constraint_not_null_updated_at"
+                              validate="true"/>                              
+    </changeSet>
+
+</databaseChangeLog>

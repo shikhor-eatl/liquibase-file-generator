@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="${current_time}::${action}::table-${table.name}"
+               author="${author_name}"
+               objectQuotingStrategy="LEGACY">
+
+        % for column in table.columns:
+            <addNotNullConstraint tableName="${table.name}"
+                              columnName="${column.name}"
+                              columnDataType="${column.type}"
+                              constraintName="constraint_not_null_${column.name}"
+                              validate="true"/>
+        % endfor                            
+    </changeSet>
+
+</databaseChangeLog>
