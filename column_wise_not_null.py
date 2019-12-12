@@ -1,9 +1,11 @@
 import time
-from mako import exceptions
 from datetime import datetime
+
+from mako import exceptions
 from mako.template import Template
 
 DELAY_SEC = 1
+
 
 class Table:
     def __init__(self, name, columns):
@@ -46,7 +48,7 @@ def create_master_file():
 
 def generate_master_xml(xmlFile):
     content = '<include file="config/liquibase/changelog/' + \
-        xmlFile + '" relativeToChangelogFile="false"/>\n'
+              xmlFile + '" relativeToChangelogFile="false"/>\n'
 
     path = '/home/eatl/python/liquibase-out/master/'
     f = open(path + 'master.xml', "a")
@@ -66,7 +68,7 @@ def generate_liquibase_files(table):
     template = Template(
         filename='/home/eatl/python/columns-wise-not-null-liquibase-template.xml')
     xmlFile = curr_time + '-add-not_null-constraint-on-' + \
-        get_table_name(table.name) + '.xml'
+              get_table_name(table.name) + '.xml'
     content = template.render(**dictionary)
     create_not_null_xml(xmlFile, content)
     print('-> Generated: ' + xmlFile)
@@ -83,7 +85,7 @@ table = Table('employee', columns)
 
 try:
     create_master_file()
-    generate_liquibase_files()
+    generate_liquibase_files(table)
     print('~~ File Generation Successful! ~~')
 except:
     print(exceptions.text_error_template().render())
